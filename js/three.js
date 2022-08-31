@@ -25,4 +25,8 @@ for (let i=0; i < sphereGeometry.attributes.position.count; i++){
     sphereGeometry.positionData.push(v3.clone());
 }
 
-
+//A material uses the coordinates of of an object to calculate its color
+let sphereMesh = new THREE.MeshNormalMaterial();
+//Combine both, and add it to the scene
+let sphere = new THREE.Mesh(sphereGeometry, sphereMesh);
+scene.add(sphere);

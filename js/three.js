@@ -14,3 +14,15 @@ renderer.setSize(innerWidth, innerHeight);
 document.body.appendChild(renderer.domElement);
 
 new OrbitControls(camera, renderer.domElement);
+
+//Creates geometry
+let sphereGeometry = new THREE.SphereGeometry(1.5, 100, 100);
+//Accessing the geometry vertices and their locations
+sphereGeometry.positionData = [];
+let v3 = new THREE.Vector3();
+for (let i=0; i < sphereGeometry.attributes.position.count; i++){
+    v3.fromBufferAttribute(sphereGeometry.attributes.position, i);
+    sphereGeometry.positionData.push(v3.clone());
+}
+
+

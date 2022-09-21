@@ -56,6 +56,14 @@ renderer.setAnimationLoop(() => {
         })
     sphereGeometry.computeVertexNormals();
     sphereGeometry.attributes.position.needsUpdate = true;
+
+    planeGeometry.positionData.forEach((p, idx) => {
+        let sineWave = (Math.sin(t) * Math.PI / 100) + 1;
+        let setNoise = noise(p.x, p.y, p.z, t / 3);
+        v3.copy(p).addScaledVector(p, setNoise);
+        planeGeometry.attributes.position.setXYZ(idx, v3.x, v3.y, v3.z);
+    })
+    planeGeometry.attributes.position.needsUpdate = true;
     //Render the sphere onto the page again
   renderer.render(scene, camera);
 });

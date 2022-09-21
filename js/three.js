@@ -37,3 +37,21 @@ let sphereMesh = new THREE.ShaderMaterial({
 //Combine both, and add it to the scene
 let sphere = new THREE.Mesh(sphereGeometry, sphereMesh);
 scene.add(sphere);
+
+//Manipulating Sphere's Geometry
+let noise = openSimplexNoise.makeNoise4D(Date.now());
+let clock = new THREE.Clock();
+
+renderer.setAnimationLoop(() => {
+    //Get the time
+    let t = clock.getElapsedTime();
+        sphereGeometry.positionData.forEach((p, idx) => {
+            //Create noise for each point in the sphere
+            let setNoise = noise(p.x, p.y, p.z, t * 1.05);
+            //Using the Vector3 function, copy the point data, and multiply it by the noise
+            //multiplying noise by the position at each verticle
+            v3.copy(p).addScaledVector(p. setNoise);
+            //Update of the positions
+            sphereGeometry.attributes.position.setXYZ(idx, v3.x, v3.y, v3.z);
+        })
+}

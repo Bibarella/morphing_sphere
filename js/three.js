@@ -26,7 +26,14 @@ for (let i=0; i < sphereGeometry.attributes.position.count; i++){
 }
 
 //A material uses the coordinates of of an object to calculate its color
-let sphereMesh = new THREE.MeshNormalMaterial();
+let sphereMesh = new THREE.ShaderMaterial({
+    uniforms: {
+        colorA: {type: 'vec3', value: new THREE.Vector3(0.5, 0.5, 0.5)},
+
+    },
+    vertexShader: document.getElementById('vertex').textContent,
+    fragmentShader: document.getElementById('fragment').textContent,
+});
 //Combine both, and add it to the scene
 let sphere = new THREE.Mesh(sphereGeometry, sphereMesh);
 scene.add(sphere);

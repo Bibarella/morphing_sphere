@@ -54,4 +54,8 @@ renderer.setAnimationLoop(() => {
             //Update of the positions
             sphereGeometry.attributes.position.setXYZ(idx, v3.x, v3.y, v3.z);
         })
-}
+    sphereGeometry.computeVertexNormals();
+    sphereGeometry.attributes.position.needsUpdate = true;
+    //Render the sphere onto the page again
+  renderer.render(scene, camera);
+});
